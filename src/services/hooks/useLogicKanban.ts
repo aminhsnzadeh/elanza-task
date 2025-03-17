@@ -81,8 +81,9 @@ export default function useLogicKanban() {
         background: isDraggingOver ? "#efefef" : "#f0f0f0",
         padding: `${spacing}px`,
         width: `${360}px`,
-        height: "calc(100vh - 275px)",
+        height: "calc(100vh - 125px)",
         margin: "0 4px",
+        overflow: "auto",
     });
 
     return {

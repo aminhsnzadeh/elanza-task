@@ -48,6 +48,6 @@ const columns = [
     },
 ]
 
-const tasks = [taskColumn1, taskColumn2]
+const tasks = [taskColumn1, taskColumn2, [], []]
 
 export { tasks, columns }
