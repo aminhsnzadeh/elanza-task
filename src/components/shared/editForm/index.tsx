@@ -9,29 +9,32 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon, EditIcon } from "lucide-react"
 import { useState } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import AMTextfield from "../input/AMTextfeild";
 import { FieldValues, useForm } from "react-hook-form";
 import AMTextarea from "../input/AMTextarea";
-import useAddTask from "@/services/hooks/useAddTask";
+import { taskItemType } from "@/services/types";
+import useEditTask from "@/services/hooks/useEditTask";
 
-export function AddTaskForm() {
-    const [date, setDate] = useState<Date>()
-    const [hasDeadline, setHasDeadline] = useState<boolean>(false)
+interface editDataType {
+    editData: taskItemType
+    columnIndex: number
+}
+
+export function EditTaskForm({ editData, columnIndex }: editDataType) {
+    const [date, setDate] = useState<Date | undefined>(editData.deadline)
+    const [hasDeadline, setHasDeadline] = useState<boolean>(editData.hasDeadline)
     const [formOpen, setFormOpen] = useState<boolean>(false)
 
-    const { control, handleSubmit, reset } = useForm()
+    const { control, handleSubmit, } = useForm()
 
     const resetForm = () => {
-        reset()
-        setDate(undefined)
-        setHasDeadline(false)
         setFormOpen(false)
     }
 
-    const { submitTask } = useAddTask(resetForm)
+    const { submitTask } = useEditTask(editData, columnIndex, resetForm)
 
     const handleTaskSubmit = (data: FieldValues) => {
         //sending date externally
@@ -44,12 +47,12 @@ export function AddTaskForm() {
     return (
         <Popover open={formOpen} onOpenChange={setFormOpen}>
             <PopoverTrigger asChild >
-                <Button>افزودن تسک</Button>
+                <EditIcon size={16} className="cursor-pointer" />
             </PopoverTrigger>
             <PopoverContent className="w-[350px]">
                 <form onSubmit={handleSubmit(handleTaskSubmit)} className="grid gap-4">
                     <div className="space-y-2">
-                        <h4 className="font-medium leading-none">اطلاعات تسک</h4>
+                        <h4 className="font-medium leading-none">ویرایش تسک</h4>
                     </div>
                     <div className="grid gap-2">
                         <div className="grid grid-cols-3 items-center gap-4">
@@ -57,6 +60,7 @@ export function AddTaskForm() {
                             <AMTextfield
                                 name="title"
                                 control={control}
+                                defaultValue={editData.title}
                                 id="title"
                                 className="col-span-2 h-8"
                             />
@@ -66,13 +70,14 @@ export function AddTaskForm() {
                             <AMTextarea
                                 name="description"
                                 control={control}
+                                defaultValue={editData.description}
                                 id="description"
                                 className="col-span-2 h-8"
                             />
                         </div>
                         <div className="grid grid-cols-3 items-center gap-4 my-2">
                             <Label htmlFor="hasDeadline">دارای ددلاین</Label>
-                            <Checkbox  onCheckedChange={(val) => {setHasDeadline(!!val);}} id="hasDeadline" />
+                            <Checkbox checked={hasDeadline} onCheckedChange={(val) => {setHasDeadline(!!val);}} id="hasDeadline" />
                         </div>
                         {
                             hasDeadline &&
@@ -81,7 +86,7 @@ export function AddTaskForm() {
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <Button
-                                        variant={"outline"}
+                                            variant={"outline"}
                                             className={cn(
                                                 "col-span-2 justify-start text-left font-normal",
                                                 !date && "text-muted-foreground"
@@ -106,7 +111,7 @@ export function AddTaskForm() {
                         <div className="grid grid-cols-3 items-center gap-4 my-2">
                             <div className="col-span-2"></div>
                             <Button type="submit" className="col-span-1" >
-                                ثبت تسک
+                                ویرایش
                             </Button>
                         </div>
                     </div>

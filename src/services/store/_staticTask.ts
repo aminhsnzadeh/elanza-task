@@ -3,7 +3,7 @@ deadlineTest.setHours(deadlineTest.getHours() + 1);
 
 const taskColumn1 = [
     {
-        id: `item-0-1`,
+        id: `item-0-${new Date().toDateString()}`,
         title: "مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی",
         description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
@@ -11,7 +11,7 @@ const taskColumn1 = [
         deadline: deadlineTest,
     },
     {
-        id: `item-0-2`,
+        id: `item-1${new Date().toDateString()}`,
         title: "string2",
         description: "string",
         dateCreated: new Date(),
@@ -22,7 +22,7 @@ const taskColumn1 = [
 
 const taskColumn2 = [
     {
-        id: `item-1-1`,
+        id: `item-2-${new Date().toDateString()}`,
         title: "string3",
         description: "string",
         dateCreated: new Date(),

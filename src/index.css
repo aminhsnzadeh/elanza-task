@@ -190,7 +190,7 @@
   /* ================= ScrollBar ================= */
   ::-webkit-scrollbar {
     width: 8px;
-    height: 6px;
+    height: 12px;
   }
   
   ::-webkit-scrollbar-track {

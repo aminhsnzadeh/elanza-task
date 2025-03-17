@@ -32,6 +32,7 @@ function TaskWall() {
                                                 id={item.id}
                                                 getItemStyle={getItemStyle}
                                                 index={index}
+                                                columnIndex={i}
                                             />
                                         ))}
                                         {provided.placeholder}

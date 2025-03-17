@@ -1,31 +1,36 @@
 // import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { taskItemType } from "@/services/types";
 import { Draggable } from "@hello-pangea/dnd";
-import { ClockIcon, DeleteIcon, EditIcon, Trash2Icon } from "lucide-react";
+import { ClockIcon, Trash2Icon } from "lucide-react";
 // import moment from "moment"
 import moment from "moment-jalaali"
+import { EditTaskForm } from "../editForm";
+import useRemoveTask from "@/services/hooks/useRemoveTask";
 
 interface taskComponentItemType {
     id: string, 
     index: number, 
     data: taskItemType, 
     getItemStyle: any
+    columnIndex: number
 }
 
-export default function Item({ id, index, data, getItemStyle }: taskComponentItemType) {
+export default function Item({ id, columnIndex, index, data, getItemStyle }: taskComponentItemType) {
     // moment.loadPersian({dialect: 'persian-modern'});
 
+    const { removeTaskFromTasks } = useRemoveTask(columnIndex)
+
     const {
-        dateCreated,
         deadline,
         description,
         hasDeadline,
         title
     } = data
 
-    const viewDateCreated = moment(dateCreated).format("jYYYY/jMM/jDD")
-    const isNearExpiration = hasDeadline ? moment(new Date()).add(1, "day").isAfter(deadline) : false
+    //different date conditions for handling the state of card in a date
+    const viewDateDeadline = hasDeadline ? moment(deadline).format("jYYYY/jMM/jDD") : "---"
     const isDateExpired = hasDeadline ? moment(new Date()).isAfter(deadline) : false
+    const isNearExpiration = hasDeadline && !isDateExpired ? moment(new Date()).add(1, "day").isAfter(deadline) : false
 
     return (
         <Draggable
@@ -64,13 +69,13 @@ export default function Item({ id, index, data, getItemStyle }: taskComponentIte
                         <div className="stack-row justify-between">
                             <div className="stack-row gap-2 items-center">
                                 <ClockIcon width={16} className={`${isDateExpired && "text-red-600"}`} />
-                                <span className={`${isDateExpired && "text-red-600"} text-sm`}>{viewDateCreated}</span>
+                                <span className={`${isDateExpired && "text-red-600"} text-sm`}>{viewDateDeadline}</span>
                                 {isDateExpired && <span className="text-red-600 text-sm" >عقب افتاده</span>}
                                 {isNearExpiration && <span className="text-amber-600 text-sm" >نزدیک به ددلاین</span>}
                             </div>
                             <div className="stack-row items-center task-action opacity-0 invisible gap-2 transition-all">
-                                <EditIcon size={16} className="cursor-pointer" />
-                                <Trash2Icon size={16} className="cursor-pointer"/>
+                                <EditTaskForm editData={data} columnIndex={columnIndex} />
+                                <Trash2Icon onClick={() => removeTaskFromTasks(id)} size={16} className="cursor-pointer"/>
                             </div>
                         </div>
                     </div>
