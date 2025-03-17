@@ -69,7 +69,6 @@ export default function useLogicKanban() {
 
     const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
         userSelect: "none",
-        padding: `${spacing}px`,
         margin: `0 0 ${spacing}px 0`,
         // change background color if dragging
         background: isDragging ? "#ccc" : "#fff",
@@ -81,7 +80,7 @@ export default function useLogicKanban() {
         background: isDraggingOver ? "#efefef" : "#f0f0f0",
         padding: `${spacing}px`,
         width: `${360}px`,
-        height: "calc(100vh - 150px)",
+        height: "calc(100vh - 208px)",
         margin: "0 4px",
         overflow: "auto",
     });

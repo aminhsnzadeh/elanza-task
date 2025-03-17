@@ -1,3 +1,5 @@
+let deadlineTest = new Date();
+deadlineTest.setHours(deadlineTest.getHours() + 1);
 
 const taskColumn1 = [
     {
@@ -5,8 +7,8 @@ const taskColumn1 = [
         title: "مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی",
         description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
-        hasDeadline: false,
-        deadline: undefined,
+        hasDeadline: true,
+        deadline: deadlineTest,
     },
     {
         id: `item-0-2`,
