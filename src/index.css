@@ -118,4 +118,37 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .stack {
+    @apply flex flex-col
+  }
+  .stack-row {
+    @apply flex flex-row
+  }
+  .layout {
+    @apply w-screen h-screen flex flex-col overflow-hidden;
+  }
+}
+
+@layer components {
+  /* ================= ScrollBar ================= */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 2px #ffffff; 
+  }
+
+  /* ============================================= */
+  /* ================= App Layout ================= */
+  
+  /* ============================================== */
 }

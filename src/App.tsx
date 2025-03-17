@@ -1,18 +1,15 @@
-import { useTaskStore } from "./services/store"
-
+import { BrowserRouter } from "react-router-dom"
+import { DashboardLayout } from "./layout"
+import MyRouter from "./router"
 
 function App() {
 
-    const { tasks } = useTaskStore()
-
     return (
-        <div>
-            {
-                tasks.map((item) => {
-                    return item
-                })
-            }
-        </div>
+        <BrowserRouter>
+            <DashboardLayout>
+                <MyRouter />
+            </DashboardLayout>
+        </BrowserRouter>
     )
 }
 
