@@ -6,6 +6,7 @@ import { ClockIcon, Trash2Icon } from "lucide-react";
 import moment from "moment-jalaali"
 import { EditTaskForm } from "../editForm";
 import useRemoveTask from "@/services/hooks/useRemoveTask";
+import { RemoveTaskAlert } from "../alerts";
 
 interface taskComponentItemType {
     id: string, 
@@ -18,8 +19,6 @@ interface taskComponentItemType {
 export default function Item({ id, columnIndex, index, data, getItemStyle }: taskComponentItemType) {
     // moment.loadPersian({dialect: 'persian-modern'});
 
-    const { removeTaskFromTasks } = useRemoveTask(columnIndex)
-
     const {
         deadline,
         description,
@@ -30,6 +29,7 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
     //different date conditions for handling the state of card in a date
     const viewDateDeadline = hasDeadline ? moment(deadline).format("jYYYY/jMM/jDD") : "---"
     const isDateExpired = hasDeadline ? moment(new Date()).isAfter(deadline) : false
+    //for now I set the deadline alert on 1DAY. this can be lower even to mins. But default is 1day
     const isNearExpiration = hasDeadline && !isDateExpired ? moment(new Date()).add(1, "day").isAfter(deadline) : false
 
     return (
@@ -47,6 +47,7 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
                         provided.draggableProps.style
                     )}
                 >
+                    {/* hover:[&>div>.task-action]:opacity-100 hover:[&>div>.task-action]:visible */}
                     <div className={`stack gap-2 p-2 hover:[&>div>.task-action]:opacity-100 hover:[&>div>.task-action]:visible ${isDateExpired && "bg-red-50"} ${isNearExpiration && "bg-amber-50"}`}>
                         <div className="stack-row">
                             {/* 
@@ -73,9 +74,10 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
                                 {isDateExpired && <span className="text-red-600 text-sm" >عقب افتاده</span>}
                                 {isNearExpiration && <span className="text-amber-600 text-sm" >نزدیک به ددلاین</span>}
                             </div>
-                            <div className="stack-row items-center task-action opacity-0 invisible gap-2 transition-all">
+                            {/* task-action opacity-0 invisible */}
+                            <div className="stack-row items-center gap-2 transition-all">
                                 <EditTaskForm editData={data} columnIndex={columnIndex} />
-                                <Trash2Icon onClick={() => removeTaskFromTasks(id)} size={16} className="cursor-pointer"/>
+                                <RemoveTaskAlert idToRemove={data.id} columnIndex={columnIndex} />
                             </div>
                         </div>
                     </div>
