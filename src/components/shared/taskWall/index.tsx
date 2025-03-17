@@ -5,7 +5,7 @@ import ColumnHead from "./_head";
 
 function TaskWall() {
     
-    const {  state: { tasks, columns },
+    const { state: { tasks, columns },
         onDragEnd, 
         getItemStyle, 
         getListStyle 
@@ -16,9 +16,9 @@ function TaskWall() {
             <div style={{ display: "flex" }}>
                 <DragDropContext onDragEnd={onDragEnd}>
                     {tasks.map((task, i: number) => (
-                        <div className="stack">
+                        <div className="stack" key={i}>
                             <ColumnHead data={columns.filter((e) => e.id - 1 == i)[0]} />
-                            <Droppable key={i} droppableId={`${i}`}>
+                            <Droppable droppableId={`${i}`}>
                                 {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}

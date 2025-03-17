@@ -2,8 +2,8 @@
 const taskColumn1 = [
     {
         id: `item-0-1`,
-        title: "string1",
-        description: "string",
+        title: "مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی",
+        description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
         hasDeadline: false,
         deadline: undefined,
