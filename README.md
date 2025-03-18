@@ -1,9 +1,9 @@
 ## Wall task manager
 Task manager app that helps you to manage your task and setting deadlines if needed and track your tasks in simple way
 Main task is acceable with '/tasks' route. 
-As you can se you have 4 columns and some sample tasks. You can change or delete them
+As you can se you have 4 columns and some sample tasks. You can change or delete them <br /><br />
 
-As tech stack :
+As tech stack : <br />
 Project core framework built on <u>React</u> + <u>Vite</u> as package manager <br />
 Developed using <u>Typescript</u> as type safe coding <br />
 Used <u>Tailwind</u> + <u>Shadcn</u> for styling and components <br />
