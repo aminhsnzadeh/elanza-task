@@ -13,7 +13,7 @@ export default function useAddTask(reset: () => void) {
             description: data.description,
             hasDeadline: !!deadlineDate,
             //this line and Id setting is because we may have conflict between adding a new item and id become exist on date string we filter it
-            id: `item-${tasks.flat().length}-${new Date().toDateString()}`,
+            id: `item-${tasks.flat().length}-${new Date().toISOString()}`,
             title: data.title
 
         }
