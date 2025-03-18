@@ -1,10 +1,14 @@
+//sample deadline generated for static data
 let deadlineTest = new Date();
-deadlineTest.setHours(deadlineTest.getHours() + 1);
+deadlineTest.setHours(deadlineTest.getHours() + 23);
+//A bit wierd when you comparison it with now date but its for test
+let overdueTest = new Date();
+overdueTest.setHours(overdueTest.getHours() - 23);
 
 const taskColumn1 = [
     {
         id: `item-0-${new Date().toDateString()}`,
-        title: "مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی مورد طولانی",
+        title: "بررسی خروجی پروژه ها",
         description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
         hasDeadline: true,
@@ -12,8 +16,8 @@ const taskColumn1 = [
     },
     {
         id: `item-1${new Date().toDateString()}`,
-        title: "string2",
-        description: "string",
+        title: "اصلاحات بنر های تبلیغاتی",
+        description: "اصلاح بنر هادر صورت داشتن زمان مورد نظر",
         dateCreated: new Date(),
         hasDeadline: false,
         deadline: undefined,
@@ -23,11 +27,11 @@ const taskColumn1 = [
 const taskColumn2 = [
     {
         id: `item-2-${new Date().toDateString()}`,
-        title: "string3",
-        description: "string",
+        title: "تبدیل سایت به PWA",
+        description: "صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
-        hasDeadline: false,
-        deadline: undefined,
+        hasDeadline: true,
+        deadline: overdueTest,
     }
 ]
 
