@@ -3,19 +3,14 @@ import { Calendar } from "@/components/ui/calendar"
 import { Label } from "@/components/ui/label"
 import { faIR } from 'date-fns/locale'; 
 import { format } from "date-fns"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { CalendarIcon } from "lucide-react"
 import { useState } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
-import AMTextfield from "../input/AMTextfeild";
 import { FieldValues, useForm } from "react-hook-form";
-import AMTextarea from "../input/AMTextarea";
 import useAddTask from "@/services/hooks/useAddTask";
+import { AMTextarea, AMTextfield } from "../input";
 
 export function AddTaskForm() {
     const [date, setDate] = useState<Date>()

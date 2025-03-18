@@ -1,12 +1,11 @@
 // import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { taskItemType } from "@/services/types";
 import { Draggable } from "@hello-pangea/dnd";
-import { ClockIcon, Trash2Icon } from "lucide-react";
-// import moment from "moment"
-import moment from "moment-jalaali"
+import { ClockIcon } from "lucide-react";
 import { EditTaskForm } from "../editForm";
-import useRemoveTask from "@/services/hooks/useRemoveTask";
 import { RemoveTaskAlert } from "../alerts";
+import moment from "moment-jalaali"
+import { AMTooltip } from "../tootltip";
 
 interface taskComponentItemType {
     id: string, 
@@ -17,7 +16,6 @@ interface taskComponentItemType {
 }
 
 export default function Item({ id, columnIndex, index, data, getItemStyle }: taskComponentItemType) {
-    // moment.loadPersian({dialect: 'persian-modern'});
 
     const {
         deadline,
@@ -47,6 +45,7 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
                         provided.draggableProps.style
                     )}
                 >
+                    {/* actions hiding system */}
                     {/* hover:[&>div>.task-action]:opacity-100 hover:[&>div>.task-action]:visible */}
                     <div className={`stack gap-2 p-2 hover:[&>div>.task-action]:opacity-100 hover:[&>div>.task-action]:visible ${isDateExpired && "bg-red-50"} ${isNearExpiration && "bg-amber-50"}`}>
                         <div className="stack-row">
@@ -71,9 +70,18 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
                             <div className="stack-row gap-2 items-center">
                                 <ClockIcon width={16} className={`${isDateExpired && "text-red-600"}`} />
                                 <span className={`${isDateExpired && "text-red-600"} text-sm`}>{viewDateDeadline}</span>
-                                {isDateExpired && <span className="text-red-600 text-sm" >عقب افتاده</span>}
-                                {isNearExpiration && <span className="text-amber-600 text-sm" >نزدیک به ددلاین</span>}
+                                {isDateExpired && 
+                                    <AMTooltip content="زمان ددلاین تسک گذشته است">
+                                        <span className="text-red-600 text-sm" >عقب افتاده</span>
+                                    </AMTooltip>
+                                }
+                                {isNearExpiration && 
+                                    <AMTooltip content="حدود 1 روز به ددلاین باقی مانده" >
+                                        <span className="text-amber-600 text-sm" >نزدیک به ددلاین</span>
+                                    </AMTooltip>
+                                }
                             </div>
+                            {/* Hiding the task actions by default and will be shown after hovering the card */}
                             {/* task-action opacity-0 invisible */}
                             <div className="stack-row items-center gap-2 transition-all">
                                 <EditTaskForm editData={data} columnIndex={columnIndex} />

@@ -12,11 +12,10 @@ import { cn } from "@/lib/utils"
 import { CalendarIcon, EditIcon } from "lucide-react"
 import { useState } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
-import AMTextfield from "../input/AMTextfeild";
 import { FieldValues, useForm } from "react-hook-form";
-import AMTextarea from "../input/AMTextarea";
 import { taskItemType } from "@/services/types";
 import useEditTask from "@/services/hooks/useEditTask";
+import { AMTextarea, AMTextfield } from "../input";
 
 interface editDataType {
     editData: taskItemType
