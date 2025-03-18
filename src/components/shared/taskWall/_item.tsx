@@ -19,12 +19,14 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
 
     const {
         deadline,
+        dateCreated,
         description,
         hasDeadline,
         title
     } = data
 
     //different date conditions for handling the state of card in a date
+    const viewDateCreated = moment(dateCreated).format("jYYYY/jMM/jDD")
     const viewDateDeadline = hasDeadline ? moment(deadline).format("jYYYY/jMM/jDD") : "---"
     const isDateExpired = hasDeadline ? moment(new Date()).isAfter(deadline) : false
     //for now I set the deadline alert on 1DAY. this can be lower even to mins. But default is 1day
@@ -49,19 +51,12 @@ export default function Item({ id, columnIndex, index, data, getItemStyle }: tas
                     {/* hover:[&>div>.task-action]:opacity-100 hover:[&>div>.task-action]:visible */}
                     <div className={`stack gap-2 p-2 hover:[&>div>.task-action]:opacity-100 hover:[&>div>.task-action]:visible ${isDateExpired && "bg-red-50"} ${isNearExpiration && "bg-amber-50"}`}>
                         <div className="stack-row">
-                            {/* 
-                                will cause a little issue for dragging. It will prevent to select the right element to drag 
-                                Comment the regular one and uncomment this then hover to title to see the result
-                            */} 
-                            {/* <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger><b className="text-md truncate inline-block w-[300px] text-right">{title}</b></TooltipTrigger>
-                                    <TooltipContent>
-                                        {title}
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>    */}
-                            <b className="text-md truncate inline-block w-[300px] text-right">{title}</b>
+                            <div className="stack-row items-center justify-between gap-2">
+                                <AMTooltip content={title}>
+                                    <b className="text-md truncate inline-block w-[250px] text-right">{title}</b>
+                                </AMTooltip>
+                                <span className="text-sm inline-block w-[50px]">{viewDateCreated}</span>
+                            </div>
                         </div>
                         <div className="text-sm ">
                             <p>{description}</p>
