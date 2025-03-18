@@ -7,7 +7,7 @@ overdueTest.setHours(overdueTest.getHours() - 23);
 
 const taskColumn1 = [
     {
-        id: `item-0-${new Date().toDateString()}`,
+        id: `item-0-${new Date().toISOString()}`,
         title: "بررسی خروجی پروژه ها",
         description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
@@ -15,7 +15,7 @@ const taskColumn1 = [
         deadline: deadlineTest,
     },
     {
-        id: `item-1${new Date().toDateString()}`,
+        id: `item-1-${new Date().toISOString()}`,
         title: "اصلاحات بنر های تبلیغاتی",
         description: "اصلاح بنر هادر صورت داشتن زمان مورد نظر",
         dateCreated: new Date(),
@@ -26,7 +26,7 @@ const taskColumn1 = [
 
 const taskColumn2 = [
     {
-        id: `item-2-${new Date().toDateString()}`,
+        id: `item-2-${new Date().toISOString()}`,
         title: "تبدیل سایت به PWA",
         description: "صنعت چاپ و با استفاده از طراحان گرافیک است",
         dateCreated: new Date(),
